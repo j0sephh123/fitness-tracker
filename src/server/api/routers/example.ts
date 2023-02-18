@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { prisma } from "../../db";
 
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 
@@ -11,11 +12,27 @@ export const exampleRouter = createTRPCRouter({
       };
     }),
 
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.example.findMany();
-  }),
+  getAccount: protectedProcedure
+    .input(z.string().nullish())
+    .query(async ({ input }) => {
+      if (input) {
+        const result = await prisma.account.findFirst({
+          where: {
+            userId: input,
+          },
+          include: {
+            workouts: true,
+          },
+        });
 
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
-  }),
+        return {
+          result: result,
+          message: "you can now see this secret message!",
+        };
+      }
+
+      return {
+        message: "you can now see this secret message!",
+      };
+    }),
 });
