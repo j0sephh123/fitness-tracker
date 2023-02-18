@@ -1,9 +1,10 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { prisma } from "../../db";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
-export const exampleRouter = createTRPCRouter({
+export const workoutsRouter = createTRPCRouter({
   // TODO input shouldn't be nullish. This request should be done when
   // the id is a string. This route will be refactored or removed in the future.
   getAccount: protectedProcedure

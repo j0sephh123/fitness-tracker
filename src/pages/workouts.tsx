@@ -1,20 +1,16 @@
-import AccessDenied from "../components/AccessDenied/AccessDenied";
-import Loading from "../components/Loading/Loading";
-import PageHandler from "../components/pages/PageHandler";
-import WorkoutsLoader from "../components/pages/Workouts/WorkoutsLoader";
+import AccessDenied from "../components/Shared/AccessDenied/AccessDenied";
+import Loading from "../components/Shared/Loading/Loading";
+import WorkoutPageHandler from "../components/pages/Workouts/WorkoutPageHandler";
+import ErrorMessage from "../components/Shared/ErrorMessage/ErrorMessage";
 import WorkoutsPage from "../components/pages/Workouts/WorkoutsPage";
 
 export default function WorkoutsPageIndex() {
   return (
-    <PageHandler
+    <WorkoutPageHandler
+      error={<ErrorMessage />}
       accessDenied={<AccessDenied />}
       loading={<Loading />}
-      renderContent={(userId: string) => (
-        <WorkoutsLoader
-          userId={userId}
-          renderWithData={(props) => <WorkoutsPage {...props} />}
-        />
-      )}
+      renderComponent={WorkoutsPage}
     />
   );
 }
