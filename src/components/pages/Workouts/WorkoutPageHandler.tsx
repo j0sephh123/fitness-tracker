@@ -5,17 +5,10 @@ import WorkoutsPage from "./WorkoutsPage";
 type Props = {
   loading: ReactNode;
   error: ReactNode;
-  renderComponent: (
-    props: React.ComponentProps<typeof WorkoutsPage>
-  ) => JSX.Element;
 };
 
 // TODO can this be generic?
-export default function WorkoutPageHandler({
-  renderComponent,
-  error,
-  loading,
-}: Props) {
+export default function WorkoutPageHandler({ error, loading }: Props) {
   const { isLoading, isError, workouts } = useWorkoutsLoad();
 
   if (isLoading) {
@@ -26,5 +19,5 @@ export default function WorkoutPageHandler({
     return <>{error}</>;
   }
 
-  return <>{renderComponent({ workouts })}</>;
+  return <>{<WorkoutsPage workouts={workouts} />}</>;
 }

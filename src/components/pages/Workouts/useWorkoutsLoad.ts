@@ -1,4 +1,3 @@
-
 import { useStore } from "../../../store";
 import { api } from "../../../utils/api";
 
@@ -9,7 +8,7 @@ export default function useWorkoutsLoad() {
     data: workouts,
     isLoading,
     isError,
-  } = api.workouts.getWorkouts.useQuery(
+  } = api.workouts.list.useQuery(
     { userId: session?.user.id as string },
     {
       enabled: !!session,
