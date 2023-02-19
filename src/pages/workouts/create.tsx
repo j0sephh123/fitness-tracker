@@ -14,6 +14,8 @@ export default function WorkoutsCreatePageIndex() {
   });
 
   const submit = () => {
+    // TODO currently when is a string and needs to be transformed into a date for prisma
+    // I think that the transformation should be done on the backend side.
     createWorkout({
       when,
       summary,
