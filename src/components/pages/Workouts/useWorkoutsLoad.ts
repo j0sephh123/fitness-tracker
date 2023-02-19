@@ -1,8 +1,9 @@
-import { useSession } from "next-auth/react";
+import useAuthSession from "../../../hooks/useAuthSession";
 import { api } from "../../../utils/api";
 
 export default function useWorkoutsLoad() {
-  const { data: sessionData, status: authStatus } = useSession();
+  const { authStatus, sessionData } = useAuthSession();
+
   const {
     data: workouts,
     isLoading,
