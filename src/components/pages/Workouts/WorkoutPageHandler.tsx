@@ -3,27 +3,23 @@ import useWorkoutsLoad from "./useWorkoutsLoad";
 import WorkoutsPage from "./WorkoutsPage";
 
 type Props = {
-  accessDenied: ReactNode;
   loading: ReactNode;
   error: ReactNode;
-  renderComponent: (props: React.ComponentProps<typeof WorkoutsPage>) => JSX.Element;
+  renderComponent: (
+    props: React.ComponentProps<typeof WorkoutsPage>
+  ) => JSX.Element;
 };
 
 // TODO can this be generic?
 export default function WorkoutPageHandler({
-  accessDenied,
   renderComponent,
   error,
   loading,
 }: Props) {
-  const { isLoading, isError, workouts, authStatus } = useWorkoutsLoad();
+  const { isLoading, isError, workouts } = useWorkoutsLoad();
 
-  if (authStatus === "loading" || isLoading) {
+  if (isLoading) {
     return <>{loading}</>;
-  }
-
-  if (authStatus === "unauthenticated") {
-    return <>{accessDenied}</>;
   }
 
   if (!workouts || isError) {

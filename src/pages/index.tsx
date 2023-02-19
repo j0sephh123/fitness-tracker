@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import { signIn, signOut } from "next-auth/react";
-import useAuthSession from "../hooks/useAuthSession";
+import { useStore } from "../store";
 
 const Home: NextPage = () => {
   return (
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
 export default Home;
 
 const AuthShowcase: React.FC = () => {
-  const { sessionData } = useAuthSession();
+  const { session } = useStore();
 
   return (
     <div
@@ -31,9 +31,9 @@ const AuthShowcase: React.FC = () => {
     >
       <button
         className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => void signOut() : () => void signIn()}
+        onClick={session ? () => void signOut() : () => void signIn()}
       >
-        {sessionData ? "Sign out" : "Sign in"}
+        {session ? "Sign out" : "Sign in"}
       </button>
     </div>
   );

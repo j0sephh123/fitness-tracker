@@ -1,19 +1,20 @@
-import useAuthSession from "../../../hooks/useAuthSession";
+
+import { useStore } from "../../../store";
 import { api } from "../../../utils/api";
 
 export default function useWorkoutsLoad() {
-  const { authStatus, sessionData } = useAuthSession();
+  const { session } = useStore();
 
   const {
     data: workouts,
     isLoading,
     isError,
   } = api.workouts.getWorkouts.useQuery(
-    { userId: sessionData?.user.id as string },
+    { userId: session?.user.id as string },
     {
-      enabled: !!sessionData,
+      enabled: !!session,
     }
   );
 
-  return { isLoading, isError, workouts, authStatus };
+  return { isLoading, isError, workouts };
 }

@@ -30,10 +30,12 @@ export const workoutsRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input: { summary, when } }) => {
+      // TODO let's install valtio to keep the global state
       const result = await prisma.workout.create({
         data: {
           summary,
-          when,
+          when: `${when}T00:00:00.000Z`, // TODO find a workaround
+          // need to add accountId
         },
       });
 
