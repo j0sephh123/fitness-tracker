@@ -1,15 +1,12 @@
-import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
-import { api } from "../../../utils/api";
+import useWorkoutsLoad from "./useWorkoutsLoad";
 import WorkoutsPage from "./WorkoutsPage";
 
 type Props = {
   accessDenied: ReactNode;
   loading: ReactNode;
   error: ReactNode;
-  renderComponent: ({
-    data,
-  }: React.ComponentProps<typeof WorkoutsPage>) => JSX.Element;
+  renderComponent: (props: React.ComponentProps<typeof WorkoutsPage>) => JSX.Element;
 };
 
 // TODO can this be generic?
@@ -19,23 +16,13 @@ export default function WorkoutPageHandler({
   error,
   loading,
 }: Props) {
-  const { data: sessionData, status } = useSession();
-  const {
-    data: workouts,
-    isLoading,
-    isError,
-  } = api.workouts.getWorkouts.useQuery(
-    { userId: sessionData?.user.id as string },
-    {
-      enabled: !!sessionData,
-    }
-  );
+  const { isLoading, isError, workouts, authStatus } = useWorkoutsLoad();
 
-  if (status === "loading" || isLoading) {
+  if (authStatus === "loading" || isLoading) {
     return <>{loading}</>;
   }
 
-  if (status === "unauthenticated" || !sessionData) {
+  if (authStatus === "unauthenticated") {
     return <>{accessDenied}</>;
   }
 
@@ -43,5 +30,5 @@ export default function WorkoutPageHandler({
     return <>{error}</>;
   }
 
-  return <>{renderComponent({ data: workouts })}</>;
+  return <>{renderComponent({ workouts })}</>;
 }

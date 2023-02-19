@@ -1,13 +1,13 @@
 import { Workout } from "@prisma/client";
 
 type Props = {
-  data: Workout[];
+  workouts: Workout[];
 };
 
-export default function WorkoutsPage({ data }: Props) {
+export default function WorkoutsPage({ workouts }: Props) {
   return (
     <div>
-      {data.map((workout) => (
+      {workouts.map((workout) => (
         <div className="text-white" key={workout.summary}>
           {workout.summary}
         </div>
