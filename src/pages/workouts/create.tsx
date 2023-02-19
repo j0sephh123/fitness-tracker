@@ -1,8 +1,10 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { api } from "../../utils/api";
 
 export default function WorkoutsCreatePageIndex() {
+  const router = useRouter();
   const [when, setWhen] = useState("");
   const [summary, setSummary] = useState("");
 
@@ -10,6 +12,8 @@ export default function WorkoutsCreatePageIndex() {
     onSuccess: () => {
       setSummary("");
       setWhen("");
+
+      router.push("/workouts");
     },
   });
 
