@@ -1,23 +1,19 @@
-import { ReactNode } from "react";
+import ErrorMessage from "../../Shared/ErrorMessage/ErrorMessage";
+import Loading from "../../Shared/Loading/Loading";
 import useWorkoutsLoad from "./useWorkoutsLoad";
 import WorkoutsPage from "./WorkoutsPage";
 
-type Props = {
-  loading: ReactNode;
-  error: ReactNode;
-};
-
 // TODO can this be generic?
-export default function WorkoutPageHandler({ error, loading }: Props) {
+export default function WorkoutPageHandler() {
   const { isLoading, isError, workouts } = useWorkoutsLoad();
 
   if (isLoading) {
-    return <>{loading}</>;
+    return <Loading />;
   }
 
   if (!workouts || isError) {
-    return <>{error}</>;
+    return <ErrorMessage />;
   }
 
-  return <>{<WorkoutsPage workouts={workouts} />}</>;
+  return <WorkoutsPage workouts={workouts} />;
 }
