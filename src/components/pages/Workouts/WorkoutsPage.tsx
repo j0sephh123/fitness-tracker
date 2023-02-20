@@ -1,6 +1,8 @@
 import { Workout } from "@prisma/client";
+import { useState } from "react";
 
 import { api } from "../../../utils/api";
+import WorkoutCard from "./WorkoutCard";
 
 type Props = {
   workouts: Workout[];
@@ -9,22 +11,35 @@ type Props = {
 export default function WorkoutsPage({ workouts }: Props) {
   const context = api.useContext();
 
-  const { mutate: removeWorkout } = api.workouts.remove.useMutation({
+  const {
+    mutate: removeWorkout,
+    isLoading: isRemoving,
+    isIdle,
+    isSuccess,
+    status,
+  } = api.workouts.remove.useMutation({
     onSuccess: () => context.workouts.list.invalidate(),
   });
 
+  const [currentlyRemovingId, setCurrentlyRemovingId] = useState<
+    Workout["id"] | null
+  >(null);
+
+  const handleRemove = (id: Workout["id"]) => {
+    setCurrentlyRemovingId(id);
+    removeWorkout(id);
+  };
+
   return (
     <div>
-      {workouts.map((workout) => (
-        <div className="text-white" key={workout.summary}>
-          {workout.summary}
-          <button
-            onClick={() => removeWorkout(workout.id)}
-            className="border bg-red-600"
-          >
-            Remove
-          </button>
-        </div>
+      {workouts.map(({ id, summary }) => (
+        <WorkoutCard
+          key={id}
+          summary={summary}
+          id={id}
+          onRemove={handleRemove}
+          isRemoving={currentlyRemovingId === id && isRemoving}
+        />
       ))}
     </div>
   );
