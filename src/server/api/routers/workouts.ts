@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { messages } from "../../../utils/constants";
+import { generateDate } from "../../../utils/date";
 import { prisma } from "../../db";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -48,8 +49,8 @@ export const workoutsRouter = createTRPCRouter({
 
         return prisma.workout.create({
           data: {
-            summary,
-            when: `${when}T00:00:00.000Z`, // TODO find a workaround
+            summary: summary || messages.defaultSummary,
+            when: generateDate(when),
             accountId,
           },
         });
@@ -75,6 +76,5 @@ export const workoutsRouter = createTRPCRouter({
           message: messages.failedToDeleteWorkout,
         });
       }
-      
     }),
 });

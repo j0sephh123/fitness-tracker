@@ -1,9 +1,11 @@
 # Tasks Board
 ## Ideas
-[] - deleting a workout should be with a confirm dialog
+[] deleting a workout should be with a confirm dialog
+[] if the workout for the day already exists, show message to the user and open that workout
 
 ## Ready for Work
-[] - loading for creation and deletion of a workout - no styling yet, just the possibility for that
-[] - notification for creation and deletion of a workout - no styling yet, just the possibility for that
+[] notification for creation and deletion of a workout - no styling yet, just the possibility for that
 ## In Progress
 ## Completed
+[x] loading for creation and deletion of a workout - no styling yet, just the possibility for that
+[x] when creating a workout if nothing is provided - create with today date and a default summary

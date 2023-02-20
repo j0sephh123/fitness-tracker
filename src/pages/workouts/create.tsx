@@ -17,13 +17,6 @@ export default function WorkoutsCreatePageIndex() {
     },
   });
 
-  const submit = () => {
-    createWorkout({
-      when,
-      summary,
-    });
-  };
-
   return (
     <>
       <Head>
@@ -45,7 +38,15 @@ export default function WorkoutsCreatePageIndex() {
         <input value={summary} onChange={(e) => setSummary(e.target.value)} />
       </div>
 
-      <button className="border p-2 text-white" onClick={submit}>
+      <button
+        className="border p-2 text-white"
+        onClick={() => {
+          createWorkout({
+            when,
+            summary,
+          });
+        }}
+      >
         Submit
       </button>
     </>
