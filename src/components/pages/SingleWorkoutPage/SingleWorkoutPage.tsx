@@ -1,4 +1,4 @@
-import { Workout } from "@prisma/client";
+import type { Workout } from "@prisma/client";
 
 type Props = {
   workout: Workout;

@@ -1,6 +1,5 @@
-import { Workout } from "@prisma/client";
+import type { Workout } from "@prisma/client";
 import Link from "next/link";
-import { useState } from "react";
 
 type Props = {
   summary: Workout["summary"];

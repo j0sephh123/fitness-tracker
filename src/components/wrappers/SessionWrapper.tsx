@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
-import { PropsWithChildren, useEffect } from "react";
+import type { PropsWithChildren } from "react";
+import { useEffect } from "react";
 import { setSession } from "../../store";
 import AccessDenied from "../Shared/AccessDenied/AccessDenied";
 import Loading from "../Shared/Loading/Loading";
