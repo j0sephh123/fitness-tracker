@@ -5,8 +5,9 @@
 
 ## Ready for Work
 ## In Progress
-- [] a page for a single workout] 
+[] add delete functionality for single workout page
 ## Completed
+[x] a page for a single workout]
 [x] loading for creation and deletion of a workout - no styling yet, just the possibility for that  
 [x] notification for creation and deletion of a workout - no styling yet, just the possibility for that  
 [x] when creating a workout if nothing is provided - create with today date and a default summary  
