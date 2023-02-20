@@ -25,8 +25,6 @@ export default function SingleWorkoutPageIndex() {
     return <ErrorMessage />;
   }
 
-  console.log(workout.when.getTime());
-
   return (
     <>
       <Head>
