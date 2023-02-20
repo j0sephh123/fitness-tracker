@@ -31,6 +31,29 @@ export const workoutsRouter = createTRPCRouter({
         });
       }
     }),
+  single: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(async ({ input: { id } }) => {
+      // TODO this seems unprotected, probably need to compare if session user is the correct one
+      try {
+        const workout = await prisma.workout.findFirstOrThrow({
+          where: {
+            id,
+          },
+        });
+
+        return workout;
+      } catch (e) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: messages.workoutNotFound,
+        });
+      }
+    }),
   create: protectedProcedure
     .input(
       z.object({

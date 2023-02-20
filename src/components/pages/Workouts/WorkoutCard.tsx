@@ -1,4 +1,5 @@
 import { Workout } from "@prisma/client";
+import Link from "next/link";
 import { useState } from "react";
 
 type Props = {
@@ -16,7 +17,7 @@ export default function WorkoutCard({
 }: Props) {
   return (
     <div className="text-white">
-      {summary}
+      <Link href={`/workouts/${id}`}>{summary}</Link>
       <button onClick={() => onRemove(id)} className="border bg-red-600">
         Remove
         {isRemoving ? "Removing..." : "Remove"}

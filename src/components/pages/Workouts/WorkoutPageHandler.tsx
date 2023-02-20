@@ -1,6 +1,6 @@
 import ErrorMessage from "../../Shared/ErrorMessage/ErrorMessage";
 import Loading from "../../Shared/Loading/Loading";
-import useWorkoutsLoad from "./useWorkoutsLoad";
+import useWorkoutsLoad from "../../../hooks/useWorkoutsLoad";
 import WorkoutsPage from "./WorkoutsPage";
 
 // TODO can this be generic?

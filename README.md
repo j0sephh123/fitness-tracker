@@ -5,6 +5,7 @@
 
 ## Ready for Work
 ## In Progress
+- [] a page for a single workout] 
 ## Completed
 [x] loading for creation and deletion of a workout - no styling yet, just the possibility for that  
 [x] notification for creation and deletion of a workout - no styling yet, just the possibility for that  

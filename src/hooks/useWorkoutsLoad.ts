@@ -1,5 +1,5 @@
-import { useStore } from "../../../store";
-import { api } from "../../../utils/api";
+import { useStore } from "../store";
+import { api } from "../utils/api";
 
 export default function useWorkoutsLoad() {
   const { session } = useStore();
