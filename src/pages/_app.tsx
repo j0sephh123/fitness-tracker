@@ -6,6 +6,7 @@ import "../styles/globals.css";
 import Navbar from "../components/Layout/Navbar/Navbar";
 import Head from "next/head";
 import SessionWrapper from "../components/wrappers/SessionWrapper";
+import Notification from "../components/Notification/Notification";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -21,7 +22,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <div className="min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <Navbar />
         <SessionWrapper>
-          <Component {...pageProps} />
+          <Notification>
+            <Component {...pageProps} />
+          </Notification>
         </SessionWrapper>
       </div>
     </SessionProvider>

@@ -4,8 +4,8 @@
 [] if the workout for the day already exists, show message to the user and open that workout
 
 ## Ready for Work
-[] notification for creation and deletion of a workout - no styling yet, just the possibility for that
 ## In Progress
 ## Completed
 [x] loading for creation and deletion of a workout - no styling yet, just the possibility for that
+[x] notification for creation and deletion of a workout - no styling yet, just the possibility for that
 [x] when creating a workout if nothing is provided - create with today date and a default summary

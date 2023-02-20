@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { setNotification } from "../../store";
 import { api } from "../../utils/api";
+import { messages } from "../../utils/constants";
 
 export default function WorkoutsCreatePageIndex() {
   const router = useRouter();
@@ -12,6 +14,8 @@ export default function WorkoutsCreatePageIndex() {
     onSuccess: () => {
       setSummary("");
       setWhen("");
+
+      setNotification(messages["notifications.workoutCreated"]);
 
       router.push("/workouts");
     },

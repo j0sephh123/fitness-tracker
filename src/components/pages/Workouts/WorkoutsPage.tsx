@@ -1,7 +1,9 @@
 import { Workout } from "@prisma/client";
 import { useState } from "react";
+import { setNotification } from "../../../store";
 
 import { api } from "../../../utils/api";
+import { messages } from "../../../utils/constants";
 import WorkoutCard from "./WorkoutCard";
 
 type Props = {
@@ -11,15 +13,13 @@ type Props = {
 export default function WorkoutsPage({ workouts }: Props) {
   const context = api.useContext();
 
-  const {
-    mutate: removeWorkout,
-    isLoading: isRemoving,
-    isIdle,
-    isSuccess,
-    status,
-  } = api.workouts.remove.useMutation({
-    onSuccess: () => context.workouts.list.invalidate(),
-  });
+  const { mutate: removeWorkout, isLoading: isRemoving } =
+    api.workouts.remove.useMutation({
+      onSuccess: () => {
+        context.workouts.list.invalidate();
+        setNotification(messages["notifications.workoutRemoved"]);
+      },
+    });
 
   const [currentlyRemovingId, setCurrentlyRemovingId] = useState<
     Workout["id"] | null
