@@ -1,12 +1,12 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useState } from "react";
+import useNavigate from "../../hooks/useNavigate";
 import { setNotification } from "../../store";
 import { api } from "../../utils/api";
 import { messages } from "../../utils/constants";
 
 export default function WorkoutsCreatePageIndex() {
-  const router = useRouter();
+  const navigate = useNavigate("/workouts");
   const [when, setWhen] = useState("");
   const [summary, setSummary] = useState("");
 
@@ -17,7 +17,7 @@ export default function WorkoutsCreatePageIndex() {
 
       setNotification(messages["notifications.workoutCreated"]);
 
-      router.push("/workouts");
+      navigate();
     },
   });
 
