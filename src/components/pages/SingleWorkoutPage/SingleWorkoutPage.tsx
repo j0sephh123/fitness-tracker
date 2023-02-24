@@ -7,11 +7,14 @@ import { messages } from "../../../utils/constants";
 import EditButton from "../../Shared/buttons/EditButton";
 import RemoveButton from "../../Shared/buttons/RemoveButton";
 
+export type SingleWorkoutPageType = "edit" | "view";
+
 type Props = {
   workout: Workout;
+  type: SingleWorkoutPageType;
 };
 
-export default function SingleWorkoutPage({ workout }: Props) {
+export default function SingleWorkoutPage({ workout, type }: Props) {
   const navigate = useNavigate("/workouts");
   const { mutate: removeWorkout, isLoading: isRemoving } =
     api.workouts.remove.useMutation({
@@ -27,6 +30,10 @@ export default function SingleWorkoutPage({ workout }: Props) {
 
   return (
     <div className="text-white">
+      {type}
+      <Link className="text-white" href={`/workouts/${workout.id}`}>
+        Back to workout
+      </Link>
       Single Workout {workout.summary}
       <Link href={`/workouts/${workout.id}/edit`}>
         <EditButton>Edit</EditButton>
