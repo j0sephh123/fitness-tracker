@@ -1,13 +1,22 @@
 # Tasks Board
 
+## Nice to have
+
+- [] if the workout for the day already exists, show message to the user and open that workout
+- [] deleting a workout should be with a confirm dialog
+- [] edit a workout when in a list -> with a modal
+
 ## Ideas
 
-- [] deleting a workout should be with a confirm dialog
-- [] if the workout for the day already exists, show message to the user and open that workout
+- [] Exercise CRUD functionality
 
 ## Ready for Work
 
+- [] edit for a workout edit page /workout/:id/edit
+
 ## In Progress
+
+[] if there are no workouts in /workouts - show message for that
 
 ## Completed
 
