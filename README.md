@@ -13,10 +13,10 @@
 
 ## In Progress
 
-- [] edit for a workout edit page /workout/:id/edit
+- [] edit when
 
 ## Completed
-
+[x] edit for a workout edit page /workout/:id/edit
 [x] if there are no workouts in /workouts - show message for that
 [x] add delete functionality for single workout page  
 [x] a page for a single workout]
