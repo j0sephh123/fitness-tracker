@@ -1,11 +1,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import SingleWorkoutPage from "../../components/pages/SingleWorkoutPage/SingleWorkoutPage";
-import ErrorMessage from "../../components/Shared/ErrorMessage/ErrorMessage";
-import Loading from "../../components/Shared/Loading/Loading";
-import { api } from "../../utils/api";
-import { parseDateForTitle } from "../../utils/date";
+import SingleWorkoutPage from "../../../components/pages/SingleWorkoutPage/SingleWorkoutPage";
+import ErrorMessage from "../../../components/Shared/ErrorMessage/ErrorMessage";
+import Loading from "../../../components/Shared/Loading/Loading";
+import { api } from "../../../utils/api";
+import { parseDateForTitle } from "../../../utils/date";
 
+// TODO still can't find a good way to extract this logic...
 export default function SingleWorkoutPageIndex() {
   const { query } = useRouter();
 

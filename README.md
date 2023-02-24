@@ -7,19 +7,18 @@
 - [] edit a workout when in a list -> with a modal
 
 ## Ideas
-
+- [] is adding a breadcrumb a good idea? for example: `workouts -> workout -> edit workout`
 - [] Exercise CRUD functionality
 
 ## Ready for Work
 
-- [] edit for a workout edit page /workout/:id/edit
-
 ## In Progress
 
-[] if there are no workouts in /workouts - show message for that
+- [] edit for a workout edit page /workout/:id/edit
 
 ## Completed
 
+[x] if there are no workouts in /workouts - show message for that
 [x] add delete functionality for single workout page  
 [x] a page for a single workout]
 [x] loading for creation and deletion of a workout - no styling yet, just the possibility for that  

@@ -1,8 +1,10 @@
 import type { Workout } from "@prisma/client";
+import Link from "next/link";
 import useNavigate from "../../../hooks/useNavigate";
 import { setNotification } from "../../../store";
 import { api } from "../../../utils/api";
 import { messages } from "../../../utils/constants";
+import EditButton from "../../Shared/buttons/EditButton";
 import RemoveButton from "../../Shared/buttons/RemoveButton";
 
 type Props = {
@@ -26,6 +28,9 @@ export default function SingleWorkoutPage({ workout }: Props) {
   return (
     <div className="text-white">
       Single Workout {workout.summary}
+      <Link href={`/workouts/${workout.id}/edit`}>
+        <EditButton>Edit</EditButton>
+      </Link>
       <RemoveButton isLoading={isRemoving} onClick={handleRemove}>
         Remove Workout
       </RemoveButton>
