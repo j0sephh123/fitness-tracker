@@ -100,4 +100,28 @@ export const workoutsRouter = createTRPCRouter({
         });
       }
     }),
+  updateSummary: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        summary: z.string(),
+      })
+    )
+    .mutation(async ({ input: { summary, id } }) => {
+      try {
+        return prisma.workout.update({
+          where: {
+            id,
+          },
+          data: {
+            summary,
+          },
+        });
+      } catch (e) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: messages["api.failedToUpdateWorkoutSummary"],
+        });
+      }
+    }),
 });

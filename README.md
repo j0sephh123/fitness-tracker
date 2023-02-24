@@ -7,7 +7,6 @@
 - [] edit a workout when in a list -> with a modal
 
 ## Ideas
-- [] is adding a breadcrumb a good idea? for example: `workouts -> workout -> edit workout`
 - [] Exercise CRUD functionality
 
 ## Ready for Work

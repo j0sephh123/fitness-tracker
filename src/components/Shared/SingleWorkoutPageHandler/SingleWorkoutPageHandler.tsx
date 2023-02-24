@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { api } from "../../../utils/api";
@@ -16,6 +17,7 @@ export default function SingleWorkoutPageHandler({ type }: Props) {
     data: workout,
     isLoading,
     isError,
+    refetch,
   } = api.workouts.single.useQuery({
     id: query.id as string,
   });
@@ -29,11 +31,20 @@ export default function SingleWorkoutPageHandler({ type }: Props) {
   }
 
   return (
-    <div>
-      <Link className="text-white" href={`/workouts/${workout.id}`}>
-        Back to workout
-      </Link>
-      <SingleWorkoutPage workout={workout} type={type} />
-    </div>
+    <>
+      <Head>
+        <title>
+          {type} {workout.summary}
+        </title>
+      </Head>
+      <div>
+        {type === "edit" && (
+          <Link className="text-white" href={`/workouts/${workout.id}`}>
+            Back to workout
+          </Link>
+        )}
+        <SingleWorkoutPage refetch={refetch} workout={workout} type={type} />
+      </div>
+    </>
   );
 }
