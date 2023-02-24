@@ -77,9 +77,11 @@ export default function SingleWorkoutPage({ workout, type, refetch }: Props) {
           "bg-transparent",
           "text-3xl",
           "text-white",
+          "outline-0",
           "border",
-          isSuccess && "focus:border-lime-600",
-          "outline-0"
+          "border-transparent",
+          "focus:border-b-white",
+          isSuccess && ["focus:border-b-green-600", "border-b-green-600"]
         )}
         value={summaryValue}
       />
