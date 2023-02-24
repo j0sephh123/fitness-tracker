@@ -1,40 +1,19 @@
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import useNavigate from "../../../hooks/useNavigate";
-import { setNotification } from "../../../store";
-import { api } from "../../../utils/api";
-import { messages } from "../../../utils/constants";
-import SingleWorkoutPage from "../../pages/SingleWorkoutPage/SingleWorkoutPage";
-import EditButton from "../buttons/EditButton";
-import RemoveButton from "../buttons/RemoveButton";
+import useGetSingleWorkout from "../../../hooks/useGetSingleWorkout";
+import GoBack from "../../pages/SingleWorkoutPage/GoBack";
+import SingleWorkoutActions from "../../pages/SingleWorkoutPage/SingleWorkoutActions";
+import SingleWorkoutPage, {
+  SingleWorkoutPageType,
+} from "../../pages/SingleWorkoutPage/SingleWorkoutPage";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import HeadTitle from "../HeadTitle/HeadTitle";
 import Loading from "../Loading/Loading";
 
-export type Props = {
-  type: "edit" | "view";
+type Props = {
+  type: SingleWorkoutPageType;
 };
 
 export default function SingleWorkoutPageHandler({ type }: Props) {
-  const { query } = useRouter();
-
-  const {
-    data: workout,
-    isLoading,
-    isError,
-    refetch,
-  } = api.workouts.single.useQuery({
-    id: query.id as string,
-  });
-
-  const navigate = useNavigate("/workouts");
-  const { mutate: removeWorkout, isLoading: isRemoving } =
-    api.workouts.remove.useMutation({
-      onSuccess: () => {
-        navigate();
-        setNotification(messages["notifications.workoutRemoved"]);
-      },
-    });
+  const { isLoading, workout, isError, refetchWorkout } = useGetSingleWorkout();
 
   if (isLoading) {
     return <Loading />;
@@ -44,37 +23,18 @@ export default function SingleWorkoutPageHandler({ type }: Props) {
     return <ErrorMessage />;
   }
 
-  const handleRemove = () => {
-    removeWorkout(workout.id);
-  };
-
   return (
     <>
-      <Head>
-        <title>
-          {type} {workout.summary}
-        </title>
-      </Head>
-      <div>
-        {type === "edit" && (
-          <Link className="text-white" href={`/workouts/${workout.id}`}>
-            Back to workout
-          </Link>
-        )}
-        <div className="flex justify-end">
-          {type === "view" && (
-            <Link href={`/workouts/${workout.id}/edit`}>
-              <EditButton>Edit</EditButton>
-            </Link>
-          )}
-          {type === "edit" && (
-            <RemoveButton isLoading={isRemoving} onClick={handleRemove}>
-              Remove Workout
-            </RemoveButton>
-          )}
-        </div>
-        <SingleWorkoutPage refetch={refetch} workout={workout} type={type} />
-      </div>
+      <HeadTitle>
+        {type} {workout.summary}
+      </HeadTitle>
+      {type === "edit" && <GoBack id={workout.id} />}
+      <SingleWorkoutActions type={type} id={workout.id} />
+      <SingleWorkoutPage
+        refetch={refetchWorkout}
+        workout={workout}
+        type={type}
+      />
     </>
   );
 }

@@ -4,7 +4,6 @@ import useWorkoutsLoad from "../../../hooks/useWorkoutsLoad";
 import WorkoutsPage from "./WorkoutsPage";
 import NoContent from "../../Shared/NoContent/NoContent";
 
-// TODO can this be generic?
 export default function WorkoutPageHandler() {
   const { isLoading, isError, workouts } = useWorkoutsLoad();
 
@@ -16,7 +15,7 @@ export default function WorkoutPageHandler() {
     return <ErrorMessage />;
   }
 
-  if (workouts.length===0) {
+  if (workouts.length === 0) {
     return <NoContent>No workouts found</NoContent>;
   }
 
