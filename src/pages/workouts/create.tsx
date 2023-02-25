@@ -9,11 +9,13 @@ export default function WorkoutsCreatePageIndex() {
   const navigate = useNavigate("/workouts");
   const [when, setWhen] = useState("");
   const [summary, setSummary] = useState("");
+  const [description, setDescription] = useState("");
 
   const { mutate: createWorkout } = api.workouts.create.useMutation({
     onSuccess: () => {
       setSummary("");
       setWhen("");
+      setDescription("");
 
       setNotification(messages["notifications.workoutCreated"]);
 
@@ -42,12 +44,21 @@ export default function WorkoutsCreatePageIndex() {
         <input value={summary} onChange={(e) => setSummary(e.target.value)} />
       </div>
 
+      <div>
+        <label className="text-white">Description</label>
+        <input
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+
       <button
         className="border p-2 text-white"
         onClick={() => {
           createWorkout({
             when,
             summary,
+            description,
           });
         }}
       >

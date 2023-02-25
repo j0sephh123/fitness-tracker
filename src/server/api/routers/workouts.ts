@@ -59,9 +59,10 @@ export const workoutsRouter = createTRPCRouter({
       z.object({
         summary: z.string(),
         when: z.string(),
+        description: z.string(),
       })
     )
-    .mutation(async ({ input: { summary, when }, ctx }) => {
+    .mutation(async ({ input: { summary, when, description }, ctx }) => {
       try {
         const { id: accountId } = await prisma.account.findFirstOrThrow({
           where: { userId: ctx.session.user.id },
@@ -75,6 +76,7 @@ export const workoutsRouter = createTRPCRouter({
             summary: summary || messages.defaultSummary,
             when: generateDate(when),
             accountId,
+            description
           },
         });
       } catch (e) {
