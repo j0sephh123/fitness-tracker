@@ -64,7 +64,9 @@ export default function SingleWorkoutPage({ workout, type, refetch }: Props) {
           />
         )}
         <div
-          onClick={() => setShouldShowCalendar(!shouldShowCalendar)}
+          onClick={() =>
+            type === "edit" && setShouldShowCalendar(!shouldShowCalendar)
+          }
           className="cursor-pointer text-2xl text-white"
         >
           {formatDate(workout.when)}
@@ -80,7 +82,7 @@ export default function SingleWorkoutPage({ workout, type, refetch }: Props) {
           "outline-0",
           "border",
           "border-transparent",
-          "focus:border-b-white",
+          !isSuccess && "focus:border-b-white",
           isSuccess && ["focus:border-b-green-600", "border-b-green-600"]
         )}
         value={summaryValue}
