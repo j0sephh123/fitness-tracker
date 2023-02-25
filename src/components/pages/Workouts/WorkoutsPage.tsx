@@ -1,4 +1,5 @@
 import type { Workout } from "@prisma/client";
+import Link from "next/link";
 import { useState } from "react";
 import { setNotification } from "../../../store";
 
@@ -32,6 +33,7 @@ export default function WorkoutsPage({ workouts }: Props) {
 
   return (
     <div>
+      <Link className="text-white" href='/workouts/create'>Create</Link>
       {workouts.map(({ id, summary }) => (
         <Card
           key={id}

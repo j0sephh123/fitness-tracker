@@ -22,6 +22,9 @@ export default function ExercisePageHandler() {
 
   return (
     <div>
+      <Link className="text-white" href="/exercises/create">
+        Create
+      </Link>
       <div className="text-white">Number of exercises: {exercises.length}</div>
       {exercises.map((exercise) => (
         <div key={exercise.id}>
