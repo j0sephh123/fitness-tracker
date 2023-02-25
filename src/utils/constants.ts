@@ -7,4 +7,5 @@ export const messages = {
   defaultSummary: "Default Summary",
   "notifications.workoutRemoved": "Workout Removed",
   "notifications.workoutCreated": "Workout Created",
+  "notifications.exerciseCreated": "Exercise Created",
 };

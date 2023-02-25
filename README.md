@@ -8,15 +8,16 @@
 - [] add click away listener for calendar
 
 ## Ideas
-- [] Exercise CRUD functionality
 
 ## Ready for Work
 
 ## In Progress
 
-- [] edit when
+- [] Exercise CRUD functionality
 
 ## Completed
+
+[x] edit when
 [x] edit for a workout edit page /workout/:id/edit
 [x] if there are no workouts in /workouts - show message for that
 [x] add delete functionality for single workout page  

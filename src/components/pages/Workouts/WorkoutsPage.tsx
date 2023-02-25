@@ -4,7 +4,7 @@ import { setNotification } from "../../../store";
 
 import { api } from "../../../utils/api";
 import { messages } from "../../../utils/constants";
-import WorkoutCard from "./WorkoutCard";
+import Card from "../../Shared/Card/Card";
 
 type Props = {
   workouts: Workout[];
@@ -33,7 +33,7 @@ export default function WorkoutsPage({ workouts }: Props) {
   return (
     <div>
       {workouts.map(({ id, summary }) => (
-        <WorkoutCard
+        <Card
           key={id}
           summary={summary}
           id={id}

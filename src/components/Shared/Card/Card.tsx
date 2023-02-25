@@ -1,6 +1,6 @@
 import type { Workout } from "@prisma/client";
 import Link from "next/link";
-import RemoveButton from "../../Shared/buttons/RemoveButton";
+import RemoveButton from "../buttons/RemoveButton";
 
 type Props = {
   summary: Workout["summary"];
@@ -9,12 +9,7 @@ type Props = {
   isRemoving: boolean;
 };
 
-export default function WorkoutCard({
-  summary,
-  onRemove,
-  id,
-  isRemoving,
-}: Props) {
+export default function Card({ summary, onRemove, id, isRemoving }: Props) {
   return (
     <div className="text-white">
       <Link href={`/workouts/${id}`}>{summary}</Link>
