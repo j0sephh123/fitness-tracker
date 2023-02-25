@@ -3,7 +3,6 @@ import Loading from "../../Shared/Loading/Loading";
 import useWorkoutsLoad from "../../../hooks/useWorkoutsLoad";
 import WorkoutsPage from "./WorkoutsPage";
 import NoContent from "../../Shared/NoContent/NoContent";
-import WorkoutCreateButton from "./WorkoutCreateButton";
 
 export default function WorkoutPageHandler() {
   const { isLoading, isError, workouts } = useWorkoutsLoad();
@@ -18,7 +17,7 @@ export default function WorkoutPageHandler() {
 
   return (
     <>
-      <WorkoutCreateButton />
+
       {workouts.length > 0 ? (
         <WorkoutsPage workouts={workouts} />
       ) : (
