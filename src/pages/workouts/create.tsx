@@ -46,7 +46,9 @@ export default function WorkoutsCreatePageIndex() {
 
       <div>
         <label className="text-white">Description</label>
-        <input
+        <textarea
+          
+          rows={5}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
