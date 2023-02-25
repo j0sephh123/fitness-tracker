@@ -5,6 +5,7 @@
 - [] if the workout for the day already exists, show message to the user and open that workout
 - [] deleting a workout should be with a confirm dialog
 - [] edit a workout when in a list -> with a modal
+- [] add click away listener for calendar
 
 ## Ideas
 - [] Exercise CRUD functionality

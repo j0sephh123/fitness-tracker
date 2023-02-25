@@ -1,8 +1,11 @@
 import type { Workout } from "@prisma/client";
 import clsx from "clsx";
+import Calendar from "react-calendar";
 import { useEffect, useState } from "react";
+import "react-calendar/dist/Calendar.css";
 import useDebounce from "../../../hooks/useDebounce";
 import { api } from "../../../utils/api";
+import { formatDate } from "../../../utils/date";
 
 export type SingleWorkoutPageType = "edit" | "view";
 
@@ -15,6 +18,7 @@ type Props = {
 export default function SingleWorkoutPage({ workout, type, refetch }: Props) {
   const [summaryValue, setSummaryValue] = useState(workout.summary);
   const debouncedSummary = useDebounce(summaryValue);
+  const [shouldShowCalendar, setShouldShowCalendar] = useState(false);
 
   const {
     mutate: updateSummary,
@@ -29,6 +33,13 @@ export default function SingleWorkoutPage({ workout, type, refetch }: Props) {
     },
   });
 
+  const { mutate: updateWhen } = api.workouts.updateWhen.useMutation({
+    onSuccess: () => {
+      setShouldShowCalendar(false);
+      refetch();
+    },
+  });
+
   useEffect(() => {
     if (debouncedSummary !== workout.summary) {
       updateSummary({
@@ -39,20 +50,41 @@ export default function SingleWorkoutPage({ workout, type, refetch }: Props) {
   }, [debouncedSummary]);
 
   return (
-    <input
-      onChange={(e) => setSummaryValue(e.target.value)}
-      disabled={type === "view"}
-      className={clsx(
-        "bg-transparent",
-        "text-3xl",
-        "text-white",
-        "outline-0",
-        "border",
-        "border-transparent",
-        "focus:border-b-white",
-        isSuccess && ["focus:border-b-green-600", "border-b-green-600"]
-      )}
-      value={summaryValue}
-    />
+    <div>
+      <div className={clsx("relative")}>
+        {shouldShowCalendar && (
+          <Calendar
+            onChange={(newWhen: any) =>
+              updateWhen({
+                id: workout.id,
+                when: newWhen,
+              })
+            }
+            value={workout.when}
+          />
+        )}
+        <div
+          onClick={() => setShouldShowCalendar(!shouldShowCalendar)}
+          className="cursor-pointer text-2xl text-white"
+        >
+          {formatDate(workout.when)}
+        </div>
+      </div>
+      <input
+        onChange={(e) => setSummaryValue(e.target.value)}
+        disabled={type === "view"}
+        className={clsx(
+          "bg-transparent",
+          "text-3xl",
+          "text-white",
+          "outline-0",
+          "border",
+          "border-transparent",
+          "focus:border-b-white",
+          isSuccess && ["focus:border-b-green-600", "border-b-green-600"]
+        )}
+        value={summaryValue}
+      />
+    </div>
   );
 }

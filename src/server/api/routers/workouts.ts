@@ -124,4 +124,31 @@ export const workoutsRouter = createTRPCRouter({
         });
       }
     }),
+
+  updateWhen: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        when: z.date(),
+      })
+    )
+    .mutation(async ({ input: { when, id } }) => {
+      try {
+        const res = await prisma.workout.update({
+          where: {
+            id,
+          },
+          data: {
+            when,
+          },
+        });
+
+        console.log(res);
+      } catch (e) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: messages["api.failedToUpdateWorkoutWhen"],
+        });
+      }
+    }),
 });

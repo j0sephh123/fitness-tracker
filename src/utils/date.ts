@@ -1,5 +1,22 @@
 const timeFragment = "T00:00:00.000Z";
 
+const months = [
+  "Jan",
+  "Febr",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 // TODO find a good format to display dates
 // TODO refactor to not repeat the logic
 export const parseDateForTitle = (date: Date) => {
@@ -21,4 +38,13 @@ export const generateDate = (date: string) => {
   }
 
   return `${date}${timeFragment}`;
+};
+
+export const formatDate = (d: Date) => {
+  const year = d.getFullYear();
+  const date = d.getDate();
+  const monthName = months[d.getMonth()];
+  const dayName = days[d.getDay()];
+
+  return `${dayName}, ${date} ${monthName} ${year}`;
 };
