@@ -18,6 +18,7 @@ model Workout {
     when        DateTime
     summary     String
     description String?
+    gym         String?
     Account     Account? @relation(fields: [accountId], references: [id])
     accountId   String?
 

@@ -10,12 +10,14 @@ export default function WorkoutsCreatePageIndex() {
   const [when, setWhen] = useState("");
   const [summary, setSummary] = useState("");
   const [description, setDescription] = useState("");
+  const [gym, setGym] = useState("");
 
   const { mutate: createWorkout } = api.workouts.create.useMutation({
     onSuccess: () => {
       setSummary("");
       setWhen("");
       setDescription("");
+      setGym("")
 
       setNotification(messages["notifications.workoutCreated"]);
 
@@ -30,7 +32,7 @@ export default function WorkoutsCreatePageIndex() {
       </Head>
       <div className="text-white">create a workout</div>
 
-      <div>
+      <div className="mb-1">
         <label className="text-white">When</label>
         <input
           value={when}
@@ -39,12 +41,17 @@ export default function WorkoutsCreatePageIndex() {
         />
       </div>
 
-      <div>
+      <div className="mb-1">
         <label className="text-white">Summary</label>
         <input value={summary} onChange={(e) => setSummary(e.target.value)} />
       </div>
 
-      <div>
+      <div className="mb-1">
+        <label className="text-white">Gym</label>
+        <input value={gym} onChange={(e) => setGym(e.target.value)} />
+      </div>
+
+      <div className="mb-1">
         <label className="text-white">Description</label>
         <textarea
           
@@ -61,6 +68,7 @@ export default function WorkoutsCreatePageIndex() {
             when,
             summary,
             description,
+            gym,
           });
         }}
       >
