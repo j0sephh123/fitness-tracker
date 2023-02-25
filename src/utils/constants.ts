@@ -1,6 +1,7 @@
 export const messages = {
   accountNotFound: "Account not found",
   workoutNotFound: "Workout not found",
+  exerciseNotFound: "Exercise not found",
   failedToDeleteWorkout: "Failed to delete workout",
   "api.failedToUpdateWorkoutSummary": "Failed to update workout summary",
   "api.failedToUpdateWorkoutWhen": "Failed to update workout when",
