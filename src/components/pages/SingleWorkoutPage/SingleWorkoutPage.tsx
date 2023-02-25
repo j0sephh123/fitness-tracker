@@ -76,6 +76,7 @@ export default function SingleWorkoutPage({ workout, type, refetch }: Props) {
         onChange={(e) => setSummaryValue(e.target.value)}
         disabled={type === "view"}
         className={clsx(
+          'w-screen',
           "bg-transparent",
           "text-3xl",
           "text-white",
