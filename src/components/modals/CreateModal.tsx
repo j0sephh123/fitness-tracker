@@ -1,25 +1,8 @@
-import clsx from "clsx";
 import { useState } from "react";
 import { setDialogOpen, setNotification, useStore } from "../../store";
 import { api } from "../../utils/api";
 import { messages } from "../../utils/constants";
-
-export type CreateType = "workout" | "exercise" | "gym";
-
-const createTypes: { type: CreateType; label: string }[] = [
-  {
-    label: "Workout",
-    type: "workout",
-  },
-  {
-    label: "Exercise",
-    type: "exercise",
-  },
-  {
-    label: "Gym",
-    type: "gym",
-  },
-];
+import Tabs, { CreateType } from "./Tabs";
 
 export default function CreateModal() {
   const { isDialogOpen } = useStore();
@@ -42,7 +25,6 @@ export default function CreateModal() {
       ctx.workouts.list.invalidate();
       setNotification(messages["notifications.workoutCreated"]);
       setDialogOpen(false);
-      
     },
   });
 
@@ -63,54 +45,54 @@ export default function CreateModal() {
           >
             ✕
           </label>
-          <div className="tabs tabs-boxed bg-inherit">
-            {createTypes.map(({ label, type }) => (
-              <a
-                className={clsx("tab", createType === type && "tab-active")}
-                key={type}
-              >
-                {label}
-              </a>
-            ))}
-          </div>
 
-          <div className="form-control my-2">
-            <label className="text-white">When</label>
-            <input
-              className="input w-full"
-              value={when.toString()}
-              onChange={(e) => setWhen(new Date(e.target.value))}
-              type="date"
-            />
-          </div>
+          <Tabs createType={createType} onClick={setCreateType} />
 
-          <div className="form-control mb-2">
-            <label className="text-white">Summary</label>
-            <input
-              className="input w-full"
-              value={summary}
-              onChange={(e) => setSummary(e.target.value)}
-            />
-          </div>
+          {createType === "workout" && (
+            <>
+              <div className="form-control my-2">
+                <label className="text-white">When</label>
+                <input
+                  className="input w-full"
+                  value={when.toString()}
+                  onChange={(e) => setWhen(new Date(e.target.value))}
+                  type="date"
+                />
+              </div>
 
-          <div className="form-control mb-2">
-            <label className="text-white">Gym</label>
-            <input
-              className="input w-full"
-              value={gym}
-              onChange={(e) => setGym(e.target.value)}
-            />
-          </div>
+              <div className="form-control mb-2">
+                <label className="text-white">Summary</label>
+                <input
+                  className="input w-full"
+                  value={summary}
+                  onChange={(e) => setSummary(e.target.value)}
+                />
+              </div>
 
-          <div className="form-control mb-4">
-            <label className="text-white">Description</label>
-            <textarea
-              className="textarea w-full"
-              rows={3}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
+              <div className="form-control mb-2">
+                <label className="text-white">Gym</label>
+                <input
+                  className="input w-full"
+                  value={gym}
+                  onChange={(e) => setGym(e.target.value)}
+                />
+              </div>
+
+              <div className="form-control mb-4">
+                <label className="text-white">Description</label>
+                <textarea
+                  className="textarea w-full"
+                  rows={3}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+            </>
+          )}
+
+          {createType === "exercise" && <div>Exercise</div>}
+          {createType === "gym" && <div>Gym</div>}
+
           <button
             className="btn w-full"
             onClick={() => {
