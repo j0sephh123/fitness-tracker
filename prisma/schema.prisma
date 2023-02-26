@@ -12,48 +12,73 @@ generator client {
 }
 
 model Workout {
-    id          String   @id @default(cuid())
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    id          String       @id @default(cuid())
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
     when        DateTime
     summary     String
     description String?
     gym         String?
-    Account     Account? @relation(fields: [accountId], references: [id])
+    Account     Account?     @relation(fields: [accountId], references: [id])
     accountId   String?
+    workoutSets WorkoutSet[]
 
     @@index([accountId])
 }
 
 model Exercise {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    title     String
-    exrx      String?
-    Account   Account? @relation(fields: [accountId], references: [id])
-    accountId String?
+    id         String       @id @default(cuid())
+    createdAt  DateTime     @default(now())
+    updatedAt  DateTime     @updatedAt
+    title      String
+    exrx       String?
+    Account    Account?     @relation(fields: [accountId], references: [id])
+    accountId  String?
+    WorkoutSet WorkoutSet[]
 
     @@index([accountId])
 }
 
+model WorkoutSet {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    reps   Int
+    weight Int
+
+    exercise   Exercise @relation(fields: [exerciseId], references: [id])
+    exerciseId String
+
+    Workout   Workout? @relation(fields: [workoutId], references: [id])
+    workoutId String?
+
+    Account   Account? @relation(fields: [accountId], references: [id])
+    accountId String?
+
+    @@index([accountId])
+    @@index([exerciseId])
+    @@index([workoutId])
+}
+
 // Necessary for Next auth
 model Account {
-    id                String     @id @default(cuid())
+    id                String       @id @default(cuid())
     userId            String
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String?    @db.Text
-    access_token      String?    @db.Text
+    refresh_token     String?      @db.Text
+    access_token      String?      @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String?    @db.Text
+    id_token          String?      @db.Text
     session_state     String?
-    user              User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
     workouts          Workout[]
     exercises         Exercise[]
+    workoutSets       WorkoutSet[]
 
     @@unique([provider, providerAccountId])
     @@index([userId])

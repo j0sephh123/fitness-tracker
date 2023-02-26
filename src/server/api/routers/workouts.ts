@@ -155,4 +155,37 @@ export const workoutsRouter = createTRPCRouter({
         });
       }
     }),
+
+  getSets: protectedProcedure
+    .input(
+      z.object({
+        workoutId: z.string(),
+      })
+    )
+    .query(async ({ ctx, input: { workoutId } }) => {
+      try {
+        // const { id: accountId } = await prisma.account.findFirstOrThrow({
+        //   where: { userId: ctx.session.user.id },
+        //   select: {
+        //     id: true,
+        //   },
+        // });
+
+        const workoutSets = await prisma.workoutSet.findMany({
+          where: {
+            workoutId,
+          },
+          include: {
+            exercise: true,
+          },
+        });
+
+        return workoutSets;
+      } catch (e) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: messages.accountNotFound,
+        });
+      }
+    }),
 });

@@ -6,6 +6,7 @@ import "react-calendar/dist/Calendar.css";
 import useDebounce from "../../../hooks/useDebounce";
 import { api } from "../../../utils/api";
 import { formatDate } from "../../../utils/date";
+import WorkoutSets from "../../WorkoutSets";
 
 export type SingleWorkoutPageType = "edit" | "view";
 
@@ -89,6 +90,7 @@ export default function SingleWorkoutPage({ workout, type, refetch }: Props) {
         value={summaryValue}
       />
       <p className="text-white">{workout.description}</p>
+      <WorkoutSets workoutId={workout.id} />
     </div>
   );
 }

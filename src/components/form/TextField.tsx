@@ -15,8 +15,6 @@ export default function TextField({
   value,
   fieldType = "input",
 }: Props) {
-  console.log({ value, fieldType });
-
   return (
     <div className="form-control mb-2">
       <label className="text-white">{label}</label>
