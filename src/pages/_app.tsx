@@ -7,6 +7,7 @@ import Head from "next/head";
 import SessionWrapper from "../components/wrappers/SessionWrapper";
 import Notification from "../components/Notification/Notification";
 import AppWrapper from "../components/Layout/AppWrapper";
+import CreateModal from "../components/modals/CreateModal";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -24,6 +25,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <Notification>
           <AppWrapper>
             <Component {...pageProps} />
+            <CreateModal />
           </AppWrapper>
         </Notification>
       </SessionWrapper>

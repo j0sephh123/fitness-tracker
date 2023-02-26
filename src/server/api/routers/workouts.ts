@@ -59,7 +59,7 @@ export const workoutsRouter = createTRPCRouter({
       z.object({
         summary: z.string(),
         gym: z.string(),
-        when: z.string(),
+        when: z.date(),
         description: z.string(),
       })
     )
@@ -75,7 +75,7 @@ export const workoutsRouter = createTRPCRouter({
         return prisma.workout.create({
           data: {
             summary: summary || messages.defaultSummary,
-            when: generateDate(when),
+            when,
             accountId,
             description,
             gym,

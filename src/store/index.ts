@@ -4,11 +4,13 @@ import type { Session } from "next-auth";
 type Store = {
   session: Session | null | undefined;
   notification: string | null;
+  isDialogOpen: boolean;
 };
 
 export const store = proxy<Store>({
   session: undefined,
   notification: null,
+  isDialogOpen: false,
 });
 
 export const setSession = (session: Store["session"]) => {
@@ -21,6 +23,10 @@ export const setSession = (session: Store["session"]) => {
 // instead of a hard coded string.
 export const setNotification = (notification: Store["notification"]) => {
   store.notification = notification;
+};
+
+export const setDialogOpen = (isDialogOpen: Store["isDialogOpen"]) => {
+  store.isDialogOpen = isDialogOpen;
 };
 
 export const useStore = () => useSnapshot(store);

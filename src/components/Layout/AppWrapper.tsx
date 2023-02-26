@@ -1,4 +1,5 @@
 import { PropsWithChildren, useState } from "react";
+import { setDialogOpen } from "../../store";
 import DrawerContent from "../Drawer/DrawerContent";
 import { DrawerIcon } from "../Icons";
 import Navbar from "./Navbar/Navbar";
@@ -18,6 +19,7 @@ export default function AppWrapper({ children }: PropsWithChildren) {
 
         <div className="drawer-content">
           <Navbar
+            onCreate={() => setDialogOpen(true)}
             toggle={
               <label onClick={() => setIsDrawerOpen(true)} className="btn">
                 <DrawerIcon />

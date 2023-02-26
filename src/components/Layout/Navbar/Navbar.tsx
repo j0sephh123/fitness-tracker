@@ -3,17 +3,18 @@ import { ReactNode } from "react";
 
 type Props = {
   toggle: ReactNode;
+  onCreate: () => void;
 };
 
-export default function Navbar({ toggle }: Props) {
+export default function Navbar({ toggle , onCreate}: Props) {
   return (
     <div className="navbar">
       <div className="flex-none">{toggle}</div>
       <div className="flex-1">
-        <a className="btn-ghost btn text-xl normal-case text-white">daisyUI</a>
+        <Link href='/' className="btn-ghost btn text-xl normal-case text-white">daisyUI</Link>
       </div>
       <div className="flex-none">
-        <Link className="text-white" href="/workouts/create">
+        <button onClick={onCreate} className="text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -28,7 +29,7 @@ export default function Navbar({ toggle }: Props) {
               d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-        </Link>
+        </button>
       </div>
     </div>
   );
