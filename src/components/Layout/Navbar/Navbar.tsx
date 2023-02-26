@@ -8,7 +8,7 @@ type Props = {
 
 export default function Navbar({ toggle , onCreate}: Props) {
   return (
-    <div className="navbar">
+    <div className="navbar bg-slate-500">
       <div className="flex-none">{toggle}</div>
       <div className="flex-1">
         <Link href='/' className="btn-ghost btn text-xl normal-case text-white">daisyUI</Link>

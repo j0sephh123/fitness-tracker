@@ -1,12 +1,10 @@
 import Head from "next/head";
 import { useState } from "react";
-import useNavigate from "../../hooks/useNavigate";
 import { setNotification } from "../../store";
 import { api } from "../../utils/api";
 import { messages } from "../../utils/constants";
 
 export default function ExercisesCreateIndex() {
-  const navigate = useNavigate("/exercises");
   const [title, setTitle] = useState("");
   const [exrx, setExrx] = useState("");
 
@@ -16,8 +14,6 @@ export default function ExercisesCreateIndex() {
       setExrx("");
 
       setNotification(messages["notifications.exerciseCreated"]);
-
-      navigate();
     },
   });
 

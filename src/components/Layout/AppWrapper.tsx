@@ -21,12 +21,15 @@ export default function AppWrapper({ children }: PropsWithChildren) {
           <Navbar
             onCreate={() => setDialogOpen(true)}
             toggle={
-              <label onClick={() => setIsDrawerOpen(true)} className="btn">
+              <label
+                onClick={() => setIsDrawerOpen(true)}
+                className="btn bg-slate-800"
+              >
                 <DrawerIcon />
               </label>
             }
           />
-          {children}
+          <div className="pt-3 pl-1 pr-3">{children}</div>
         </div>
         <DrawerContent
           overlay={
