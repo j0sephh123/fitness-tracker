@@ -32,12 +32,7 @@ export default function WorkoutsPage({ workouts }: Props) {
   return (
     <div>
       {workouts.map((workout) => (
-        <Card
-          key={workout.id}
-          workout={workout}
-          onRemove={handleRemove}
-          isRemoving={currentlyRemovingId === workout.id && isRemoving}
-        />
+        <Card key={workout.id} workout={workout} onRemove={handleRemove} />
       ))}
     </div>
   );
