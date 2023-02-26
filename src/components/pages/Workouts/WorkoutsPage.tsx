@@ -1,5 +1,4 @@
 import type { Workout } from "@prisma/client";
-import { useState } from "react";
 import { setNotification } from "../../../store";
 import { api } from "../../../utils/api";
 import { messages } from "../../../utils/constants";
@@ -20,12 +19,7 @@ export default function WorkoutsPage({ workouts }: Props) {
       },
     });
 
-  const [currentlyRemovingId, setCurrentlyRemovingId] = useState<
-    Workout["id"] | null
-  >(null);
-
   const handleRemove = (id: Workout["id"]) => {
-    setCurrentlyRemovingId(id);
     removeWorkout(id);
   };
 
