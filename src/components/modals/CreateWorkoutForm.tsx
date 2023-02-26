@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { api } from "../../utils/api";
 import ConfirmButton from "./ConfirmButton";
-import { setDialogOpen, setNotification, useStore } from "../../store";
+import { setDialogOpen, setNotification } from "../../store";
 import { messages } from "../../utils/constants";
-import CloseButton from "./CloseButton";
+import TextField from "../form/TextField";
 
 export default function CreateWorkoutForm() {
   const [when, setWhen] = useState<Date>(new Date());
@@ -27,43 +27,21 @@ export default function CreateWorkoutForm() {
 
   return (
     <>
-      <div className="form-control my-2">
-        <label className="text-white">When</label>
-        <input
-          className="input w-full"
-          value={when.toString()}
-          onChange={(e) => setWhen(new Date(e.target.value))}
-          type="date"
-        />
-      </div>
+      <TextField
+        fieldType="date"
+        label="When"
+        value={when.toString()}
+        onChange={setWhen}
+      />
+      <TextField label="Summary" value={summary} onChange={setSummary} />
+      <TextField label="Gym" value={gym} onChange={setGym} />
+      <TextField
+        fieldType="textarea"
+        label="Description"
+        value={description}
+        onChange={setDescription}
+      />
 
-      <div className="form-control mb-2">
-        <label className="text-white">Summary</label>
-        <input
-          className="input w-full"
-          value={summary}
-          onChange={(e) => setSummary(e.target.value)}
-        />
-      </div>
-
-      <div className="form-control mb-2">
-        <label className="text-white">Gym</label>
-        <input
-          className="input w-full"
-          value={gym}
-          onChange={(e) => setGym(e.target.value)}
-        />
-      </div>
-
-      <div className="form-control mb-4">
-        <label className="text-white">Description</label>
-        <textarea
-          className="textarea w-full"
-          rows={3}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
       <ConfirmButton
         onClick={() => {
           createWorkout({

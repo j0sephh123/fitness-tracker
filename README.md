@@ -8,12 +8,12 @@
 - [] add click away listener for calendar
 
 ## Ideas
-
+- [] A component that display a set of days as days of the week. For example, display last 3 days or next 3 days and so on based on props - since I'm not sure yet. Definitely want to have upcoming workout, but I want it to be different than workout, but not sure how yet.
 ## Ready for Work
-
-## In Progress
-
 - [] Exercise CRUD functionality
+## In Progress
+- 
+
 
 ## Completed
 
