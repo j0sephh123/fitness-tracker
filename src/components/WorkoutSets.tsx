@@ -18,7 +18,6 @@ export default function WorkoutSets({ workoutId }: Props) {
     <div>
       {data.map((workoutSet) => (
         <div className="text-white" key={workoutSet.id}>
-          <span>{workoutSet.exercise.title}</span> 
           <span>{workoutSet.reps}</span> x <span>{workoutSet.weight}</span>
           kg
         </div>
