@@ -162,7 +162,7 @@ export const workoutsRouter = createTRPCRouter({
         workoutId: z.string(),
       })
     )
-    .query(async ({ ctx, input: { workoutId } }) => {
+    .query(async ({ input: { workoutId } }) => {
       try {
         // const { id: accountId } = await prisma.account.findFirstOrThrow({
         //   where: { userId: ctx.session.user.id },
@@ -185,6 +185,33 @@ export const workoutsRouter = createTRPCRouter({
         throw new TRPCError({
           code: "NOT_FOUND",
           message: messages.accountNotFound,
+        });
+      }
+    }),
+  updateSets: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        field: z.string(),
+        value: z.number(),
+      })
+    )
+    .mutation(async ({ input: { field, id, value } }) => {
+      try {
+        const res = await prisma.workoutSet.update({
+          where: {
+            id,
+          },
+          data: {
+            [field]: value,
+          },
+        });
+
+        console.log(res);
+      } catch (e) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: messages["api.failedToUpdateWorkoutWhen"],
         });
       }
     }),
