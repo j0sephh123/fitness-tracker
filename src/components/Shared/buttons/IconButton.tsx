@@ -6,11 +6,9 @@ type Props = {
 };
 
 export default function IconButton(props: Props) {
-  console.log(props);
-
   return (
     <button
-      className={clsx("btn-square", "btn", "btn-xs")}
+      className={clsx("btn-square", "btn", "btn-xs", "bg-slate-900")}
       onClick={props.onClick}
     >
       {props.type === "plus" && (

@@ -45,7 +45,7 @@ model WorkoutSet {
     updatedAt DateTime @updatedAt
 
     reps   Int
-    weight Int
+    weight Float
 
     exercise   Exercise @relation(fields: [exerciseId], references: [id])
     exerciseId String

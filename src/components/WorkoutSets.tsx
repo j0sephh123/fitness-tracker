@@ -1,17 +1,22 @@
 import { Workout } from "@prisma/client";
 import { api } from "../utils/api";
-import IconButton from "./Shared/buttons/IconButton";
-import SingleWorkoutSet from "./SingleWorkoutSet";
+import SingleWorkoutSet from "./SingleWorkoutSet/SingleWorkoutSet";
 
 type Props = {
   workoutId: Workout["id"];
 };
 
 export default function WorkoutSets({ workoutId }: Props) {
-  const { data, refetch, isFetching } = api.workouts.getSets.useQuery({
+  const { data, refetch } = api.workouts.getSets.useQuery({
     workoutId,
   });
-  const { mutate } = api.workouts.updateSets.useMutation({
+  const { mutate: update } = api.workouts.updateSets.useMutation({
+    onSuccess: () => refetch(),
+  });
+  const { mutate: duplicate } = api.workouts.duplicateWorkoutSet.useMutation({
+    onSuccess: () => refetch(),
+  });
+  const { mutate: remove } = api.workouts.removeWorkoutSet.useMutation({
     onSuccess: () => refetch(),
   });
 
@@ -19,14 +24,24 @@ export default function WorkoutSets({ workoutId }: Props) {
     return null;
   }
 
-  console.log(data);
-
-  // field is reps or weight
-
   return (
     <div>
       {data.map((workoutSet) => (
-        <SingleWorkoutSet key={workoutSet.id} workoutSet={workoutSet} />
+        <SingleWorkoutSet
+          onRemove={() =>
+            remove({
+              id: workoutSet.id,
+            })
+          }
+          update={update}
+          onDuplicate={() =>
+            duplicate({
+              id: workoutSet.id,
+            })
+          }
+          key={workoutSet.id}
+          workoutSet={workoutSet}
+        />
       ))}
     </div>
   );

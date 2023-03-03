@@ -197,6 +197,8 @@ export const workoutsRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input: { field, id, value } }) => {
+      console.log({ id, field, value });
+
       try {
         const res = await prisma.workoutSet.update({
           where: {
@@ -208,6 +210,56 @@ export const workoutsRouter = createTRPCRouter({
         });
 
         console.log(res);
+      } catch (e) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: messages["api.failedToUpdateWorkoutWhen"],
+        });
+      }
+    }),
+  duplicateWorkoutSet: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ input: { id } }) => {
+      try {
+        const workoutSet = await prisma.workoutSet.findFirst({ where: { id } });
+
+        if (!workoutSet) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: messages["api.failedToFindWorkoutSet"],
+          });
+        }
+
+        return prisma.workoutSet.create({
+          data: {
+            reps: workoutSet.reps,
+            weight: workoutSet.weight,
+            exerciseId: workoutSet.exerciseId,
+            workoutId: workoutSet.workoutId,
+            accountId: workoutSet.accountId,
+          },
+        });
+      } catch (e) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: messages["api.failedToUpdateWorkoutWhen"],
+        });
+      }
+    }),
+
+  removeWorkoutSet: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ input: { id } }) => {
+      try {
+        return prisma.workoutSet.delete({ where: { id } });
       } catch (e) {
         throw new TRPCError({
           code: "NOT_FOUND",
